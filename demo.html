@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quotation Demo | John Linnu Kalavala</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #fafaf8;
+            --card-bg: #ffffff;
+            --text-main: #1a1a2e;
+            --text-muted: #64748b;
+            --accent-indigo: #6366f1;
+            --accent-indigo-hover: #4f46e5;
+            --accent-violet: #8b5cf6;
+            --accent-emerald: #10b981;
+            --border-color: #ececf1;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-indigo: 0 4px 14px 0 rgba(99, 102, 241, 0.39);
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-main);
+        }
+
+        a {
+            color: var(--accent-indigo);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--accent-indigo-hover);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Header */
+        header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+        
+        .back-link:hover {
+            color: var(--accent-indigo);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: rgba(99, 102, 241, 0.1);
+            color: var(--accent-indigo);
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Layout */
+        .demo-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (min-width: 992px) {
+            .demo-layout {
+                grid-template-columns: 1fr 400px;
+            }
+            .sticky-summary {
+                position: sticky;
+                top: 2rem;
+            }
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card-title-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background-color: rgba(99, 102, 241, 0.1);
+            color: var(--accent-indigo);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        /* Forms */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+
+        @media (min-width: 640px) {
+            .form-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .full-width {
+                grid-column: 1 / -1;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            color: var(--text-main);
+            background-color: #fff;
+            border: 1px solid #cbd5e1;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.2rem;
+            padding-right: 2.5rem;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--accent-indigo);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        input[readonly] {
+            background-color: #f8fafc;
+            color: var(--text-muted);
+            cursor: not-allowed;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        /* Summary Section */
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9375rem;
+        }
+        
+        .summary-row:last-of-type {
+            border-bottom: none;
+        }
+
+        .summary-row.subtotal {
+            font-weight: 600;
+            border-top: 1px dashed var(--border-color);
+            border-bottom: none;
+            margin-top: 0.5rem;
+            padding-top: 1rem;
+        }
+
+        .summary-row.discount {
+            color: var(--accent-emerald);
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border-radius: var(--radius-md);
+            margin-top: 1rem;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .summary-total-label {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        .summary-total-value {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--accent-indigo);
+            transition: color 0.3s ease;
+        }
+        
+        .value-update {
+            animation: pulse-color 0.5s ease;
+        }
+        
+        @keyframes pulse-color {
+            0% { color: var(--accent-indigo); }
+            50% { color: var(--accent-violet); transform: scale(1.05); }
+            100% { color: var(--accent-indigo); transform: scale(1); }
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 1.5rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: var(--radius-md);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            min-height: 48px;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-indigo) 0%, var(--accent-violet) 100%);
+            color: white;
+            box-shadow: var(--shadow-indigo);
+            margin-top: 1.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px 0 rgba(99, 102, 241, 0.45);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-outline:hover {
+            background: var(--bg-color);
+            border-color: #cbd5e1;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(20px);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0,0,0,0.05);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: rgba(0,0,0,0.1);
+        }
+
+        /* Quotation Document Style */
+        .quote-doc {
+            padding: 2.5rem;
+            background: white;
+        }
+
+        .quote-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid var(--text-main);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        @media (max-width: 600px) {
+            .quote-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        .company-info h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-indigo);
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .quote-meta {
+            text-align: right;
+        }
+        
+        @media (max-width: 600px) {
+            .quote-meta {
+                text-align: left;
+            }
+        }
+
+        .quote-meta h3 {
+            font-size: 1.75rem;
+            color: var(--text-main);
+            letter-spacing: 0.05em;
+        }
+
+        .quote-meta p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .customer-info-box {
+            background-color: var(--bg-color);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent-indigo);
+        }
+
+        .quote-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .quote-table th {
+            background-color: var(--text-main);
+            color: white;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.875rem;
+        }
+
+        .quote-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        .quote-table tr:nth-child(even) td {
+            background-color: var(--bg-color);
+        }
+        
+        .col-qty { width: 10%; text-align: center; }
+        .col-price { width: 20%; text-align: right; }
+        .col-total { width: 20%; text-align: right; font-weight: 600; }
+
+        .quote-table th.col-qty, .quote-table th.col-price, .quote-table th.col-total {
+            text-align: right;
+        }
+        .quote-table th.col-qty { text-align: center; }
+
+        .quote-totals {
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-bottom: 3rem;
+        }
+        
+        .quote-totals-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .quote-totals-row.grand-total {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            border-bottom: none;
+            border-top: 2px solid var(--text-main);
+            padding-top: 1rem;
+            margin-top: 0.5rem;
+            color: var(--accent-indigo);
+        }
+
+        .quote-footer-doc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+        }
+        
+        .quote-terms h4 {
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        .quote-terms ul {
+            padding-left: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-footer {
+            background-color: var(--bg-color);
+            padding: 1.5rem 2.5rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            text-align: center;
+        }
+        
+        @media (min-width: 600px) {
+            .modal-footer {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                text-align: left;
+            }
+        }
+
+        /* Bottom Section & Footer */
+        .bottom-section {
+            text-align: center;
+            max-width: 700px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            border: 1px dashed #cbd5e1;
+        }
+
+        .bottom-section p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 1.0625rem;
+        }
+
+        .site-footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 2rem;
+        }
+
+        /* Demo Hub Switcher Bar */
+        .demo-hub-nav {
+            background: rgba(15, 23, 42, 0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            font-family: inherit;
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+        }
+        .demo-hub-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .demo-hub-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #e2e8f0;
+            text-decoration: none;
+        }
+        .demo-hub-tag {
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .demo-hub-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .demo-hub-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .demo-hub-link:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .demo-hub-link.active {
+            color: #fbbf24;
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            font-weight: 600;
+        }
+        .demo-hub-home-btn {
+            color: #f1f5f9;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .demo-hub-home-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Demo Showcase Switcher Hub -->
+<nav class="demo-hub-nav">
+    <div class="demo-hub-container">
+        <a href="index.html" class="demo-hub-brand">
+            <span class="demo-hub-tag">Live Showcase</span>
+            <span>John Linnu Kalavala &bull; Project Demos</span>
+        </a>
+        <div class="demo-hub-links">
+            <a href="index.html" class="demo-hub-link demo-hub-home-btn">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+                Portfolio Main
+            </a>
+            <a href="tima-demo.html" class="demo-hub-link">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                TIMA Music Academy
+            </a>
+            <a href="techsummit-demo.html" class="demo-hub-link">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/></svg>
+                TechSummit &amp; PhonePe
+            </a>
+            <a href="demo.html" class="demo-hub-link active">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/></svg>
+                KAPL Solar Quotation
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <header>
+        <a href="index.html" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Back to Portfolio
+        </a>
+        <br>
+        <div class="badge">SAMPLE SYSTEM</div>
+        <h1>Interactive Demo</h1>
+        <p>Experience how my custom quotation systems work. Change the options below to see real-time calculations.</p>
+    </header>
+
+    <div class="demo-layout">
+        <!-- Form Column -->
+        <div class="form-column">
+            
+            <!-- Section 1 -->
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-title-icon">1</div>
+                    Customer Details
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="custName">Customer Name</label>
+                        <input type="text" id="custName" placeholder="e.g. Acme Corp" value="Demo Client">
+                    </div>
+                    <div class="form-group">
+                        <label for="custPhone">Phone Number</label>
+                        <input type="tel" id="custPhone" placeholder="e.g. +91 98765 43210" value="+91 98765 43210">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="custEmail">Email Address</label>
+                        <input type="email" id="custEmail" placeholder="e.g. hello@example.com" value="demo@example.com">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="custAddress">Installation Address</label>
+                        <textarea id="custAddress" rows="2" placeholder="Enter full address">123 Tech Park, Innovation Hub, Bengaluru 560001</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-title-icon">2</div>
+                    Product Selection
+                </div>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="sysType">System Size & Type</label>
+                        <select id="sysType" onchange="calculateQuote()">
+                            <option value="3kW">3kW Residential</option>
+                            <option value="5kW" selected>5kW Residential</option>
+                            <option value="10kW">10kW Commercial</option>
+                            <option value="15kW">15kW Commercial</option>
+                            <option value="25kW">25kW Industrial</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="panelType">Solar Panel Type</label>
+                        <select id="panelType" onchange="calculateQuote()">
+                            <option value="Mono PERC 545W">Mono PERC 545W</option>
+                            <option value="Bifacial 550W" selected>Bifacial 550W</option>
+                            <option value="HJT 580W">HJT 580W</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="numPanels">Number of Panels (Auto)</label>
+                        <input type="text" id="numPanels" readonly value="10">
+                    </div>
+                    <div class="form-group">
+                        <label for="inverterType">Inverter Technology</label>
+                        <select id="inverterType" onchange="calculateQuote()">
+                            <option value="String Inverter">String Inverter</option>
+                            <option value="Micro Inverter" selected>Micro Inverter</option>
+                            <option value="Hybrid Inverter">Hybrid Inverter (For Battery)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="batteryType">Battery Backup</label>
+                        <select id="batteryType" onchange="calculateQuote()">
+                            <option value="No Battery" selected>No Battery</option>
+                            <option value="5kWh Lithium">5kWh Lithium</option>
+                            <option value="10kWh Lithium">10kWh Lithium</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+        </div> <!-- End Form Column -->
+
+        <!-- Summary Column -->
+        <div class="summary-column">
+            <div class="card sticky-summary">
+                <div class="card-title">
+                    <div class="card-title-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                    </div>
+                    Pricing Breakdown
+                </div>
+                
+                <div class="summary-row">
+                    <span id="lblPanelCost">Panels Cost</span>
+                    <span id="valPanelCost">₹0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Inverter Cost</span>
+                    <span id="valInverterCost">₹0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Battery Cost</span>
+                    <span id="valBatteryCost">₹0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Installation (15%)</span>
+                    <span id="valInstallCost">₹0</span>
+                </div>
+                
+                <div class="summary-row subtotal">
+                    <span>Subtotal</span>
+                    <span id="valSubtotal">₹0</span>
+                </div>
+                <div class="summary-row">
+                    <span>GST (18%)</span>
+                    <span id="valGst">₹0</span>
+                </div>
+                <div class="summary-row discount">
+                    <span>Govt. Subsidy</span>
+                    <span id="valSubsidy">-₹78,000</span>
+                </div>
+                
+                <div class="summary-total">
+                    <span class="summary-total-label">Total Amount</span>
+                    <span class="summary-total-value" id="valTotal">₹0</span>
+                </div>
+                
+                <button class="btn btn-primary" onclick="generateQuote()">
+                    Generate Sample Quotation
+                    <svg style="margin-left:8px;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                </button>
+            </div>
+        </div> <!-- End Summary Column -->
+
+    </div>
+
+    <!-- Bottom Info -->
+    <div class="bottom-section">
+        <h3>Need a custom quotation, booking, or web system?</h3>
+        <p>This is a simplified demonstration. The actual systems I build include advanced quotation generators, interactive music slot booking platforms, conference registration &amp; digital ticketing systems, custom pricing engines, and automated document generation.</p>
+        <a href="index.html#contact" class="btn btn-outline">Let's discuss your project</a>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; <span id="currentYear"></span> John Linnu Kalavala — Demo System</p>
+        <a href="index.html" style="display:inline-block; margin-top:0.5rem; font-weight:500;">Back to Portfolio</a>
+    </footer>
+
+</div>
+
+<!-- Quotation Modal -->
+<div class="modal-overlay" id="quoteModal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeQuote()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        
+        <div class="quote-doc">
+            <div class="quote-header">
+                <div class="company-info">
+                    <h2>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="2" x2="12" y2="22"></line><path d="M20 9a10 10 0 0 0-16 0"></path><path d="M20 15a10 10 0 0 0-16 0"></path></svg>
+                        Demo Solar Company
+                    </h2>
+                    <p>123 Clean Energy Park, Green City<br>contact@demosolar.com | 1800-123-4567</p>
+                </div>
+                <div class="quote-meta">
+                    <h3>QUOTATION</h3>
+                    <p><strong>Ref:</strong> DEMO-<span id="docRefNum">001</span></p>
+                    <p><strong>Date:</strong> <span id="docDate"></span></p>
+                    <p><strong>Valid Until:</strong> <span id="docValid"></span></p>
+                </div>
+            </div>
+            
+            <div class="customer-info-box">
+                <h4>Prepared For:</h4>
+                <div style="display: flex; justify-content: space-between; flex-wrap: wrap; margin-top: 0.5rem;">
+                    <div>
+                        <strong id="docCustName">Demo Client</strong><br>
+                        <span id="docCustAddress">Address line 1</span>
+                    </div>
+                    <div style="text-align: right;">
+                        <span id="docCustPhone">+91 9876543210</span><br>
+                        <span id="docCustEmail">client@example.com</span>
+                    </div>
+                </div>
+            </div>
+            
+            <h4 style="margin-bottom: 1rem;">System Specifications: <span id="docSysSize" style="color:var(--accent-indigo)">5kW</span> Grid-Tied Solar Plant</h4>
+            
+            <table class="quote-table">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th class="col-qty">Qty</th>
+                        <th class="col-price">Unit Price</th>
+                        <th class="col-total">Total</th>
+                    </tr>
+                </thead>
+                <tbody id="docTableBody">
+                    <!-- Injected via JS -->
+                </tbody>
+            </table>
+            
+            <div class="quote-totals">
+                <div class="quote-totals-row">
+                    <span>Subtotal</span>
+                    <span id="docSubtotal">₹0</span>
+                </div>
+                <div class="quote-totals-row">
+                    <span>GST (18%)</span>
+                    <span id="docGst">₹0</span>
+                </div>
+                <div class="quote-totals-row" style="color:var(--accent-emerald)">
+                    <span>Government Subsidy</span>
+                    <span id="docSubsidy">-₹78,000</span>
+                </div>
+                <div class="quote-totals-row grand-total">
+                    <span>Total Amount</span>
+                    <span id="docTotal">₹0</span>
+                </div>
+            </div>
+            
+            <div class="quote-terms">
+                <h4>Terms & Conditions</h4>
+                <ul class="quote-footer-doc">
+                    <li>Prices are inclusive of standard installation within city limits.</li>
+                    <li>Payment terms: 50% advance, 40% on material delivery, 10% on commissioning.</li>
+                    <li>Warranty: 25 years linear performance on panels, 10 years on inverter.</li>
+                    <li>Subsidy processing depends on relevant government portal approvals.</li>
+                </ul>
+                <p style="text-align: center; color: #94a3b8; font-size: 0.75rem; margin-top: 2rem; font-style: italic;">
+                    * This is a sample quotation generated by John Linnu Kalavala's demo system. *
+                </p>
+            </div>
+        </div>
+        
+        <div class="modal-footer">
+            <div style="font-size: 0.9375rem;">
+                <strong>Like what you see?</strong> Contact me to get a system like this built.
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button onclick="downloadPDF()" class="btn btn-primary" style="margin-top:0; width:auto; min-height:40px; padding: 0.5rem 1.25rem; cursor:pointer; border:none;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                    Download PDF
+                </button>
+                <a href="mailto:johnlinnu@gmail.com" class="btn btn-outline" style="margin-top:0; width:auto; min-height:40px; padding: 0.5rem 1.25rem;">
+                    Contact Developer
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // System Data Configuration
+    const panelsMap = {
+        '3kW': 6,
+        '5kW': 10,
+        '10kW': 19,
+        '15kW': 28,
+        '25kW': 46
+    };
+
+    const panelPriceMap = {
+        'Mono PERC 545W': 15500,
+        'Bifacial 550W': 18200,
+        'HJT 580W': 22000
+    };
+
+    const batteryPriceMap = {
+        'No Battery': 0,
+        '5kWh Lithium': 175000,
+        '10kWh Lithium': 320000
+    };
+    
+    // Formatting currency
+    const formatINR = (amount) => {
+        return new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+            maximumFractionDigits: 0
+        }).format(amount);
+    };
+
+    // Main calculation function
+    function calculateQuote(isGenerating = false) {
+        // Get values
+        const sysType = document.getElementById('sysType').value;
+        const panelType = document.getElementById('panelType').value;
+        const inverterType = document.getElementById('inverterType').value;
+        const batteryType = document.getElementById('batteryType').value;
+        
+        // Update number of panels input
+        const numPanels = panelsMap[sysType];
+        document.getElementById('numPanels').value = numPanels;
+        
+        // 1. Panel Cost
+        const panelUnitPrice = panelPriceMap[panelType];
+        const panelTotal = numPanels * panelUnitPrice;
+        
+        // 2. Inverter Cost
+        let inverterTotal = 0;
+        const isSmallSys = ['3kW', '5kW'].includes(sysType);
+        
+        if (inverterType === 'String Inverter') {
+            inverterTotal = isSmallSys ? 45000 : 85000;
+        } else if (inverterType === 'Micro Inverter') {
+            inverterTotal = isSmallSys ? 65000 : 120000;
+        } else if (inverterType === 'Hybrid Inverter') {
+            inverterTotal = isSmallSys ? 85000 : 150000;
+        }
+        
+        // 3. Battery Cost
+        const batteryTotal = batteryPriceMap[batteryType];
+        
+        // 4. Installation
+        const equipmentCost = panelTotal + inverterTotal + batteryTotal;
+        const installTotal = equipmentCost * 0.15;
+        
+        // 5. Subtotal
+        const subtotal = equipmentCost + installTotal;
+        
+        // 6. GST
+        const gst = subtotal * 0.18;
+        
+        // 7. Subsidy (Fixed 78k as per requirements)
+        const subsidy = -78000;
+        
+        // 8. Final Total
+        const totalAmount = subtotal + gst + subsidy;
+        
+        // Return data block if we're generating the doc
+        if (isGenerating) {
+            return {
+                sysType, panelType, numPanels, panelUnitPrice, panelTotal,
+                inverterType, inverterTotal,
+                batteryType, batteryTotal,
+                installTotal, subtotal, gst, subsidy, totalAmount
+            };
+        }
+        
+        // Otherwise, update UI
+        updateSummaryUI({
+            panelTotal, inverterTotal, batteryTotal, installTotal,
+            subtotal, gst, subsidy, totalAmount, numPanels, panelType
+        });
+    }
+
+    // Update the live summary UI with animation
+    function updateSummaryUI(data) {
+        const updateField = (id, val, format = true) => {
+            const el = document.getElementById(id);
+            const oldVal = el.innerText;
+            const newVal = format ? formatINR(val) : val;
+            
+            if (oldVal !== newVal) {
+                el.innerText = newVal;
+                el.classList.remove('value-update');
+                void el.offsetWidth; // trigger reflow
+                el.classList.add('value-update');
+            }
+        };
+
+        document.getElementById('lblPanelCost').innerText = `Solar Panels (${data.numPanels}x)`;
+        
+        updateField('valPanelCost', data.panelTotal);
+        updateField('valInverterCost', data.inverterTotal);
+        updateField('valBatteryCost', data.batteryTotal);
+        updateField('valInstallCost', data.installTotal);
+        updateField('valSubtotal', data.subtotal);
+        updateField('valGst', data.gst);
+        updateField('valSubsidy', data.subsidy);
+        updateField('valTotal', data.totalAmount);
+    }
+
+    // Generate Modal Doc
+    function generateQuote() {
+        const data = calculateQuote(true);
+        
+        // Set dates & refs
+        const today = new Date();
+        document.getElementById('docDate').innerText = today.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+        
+        const validDate = new Date();
+        validDate.setDate(today.getDate() + 15);
+        document.getElementById('docValid').innerText = validDate.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+        
+        document.getElementById('docRefNum').innerText = Math.floor(1000 + Math.random() * 9000);
+        
+        // Set Customer
+        document.getElementById('docCustName').innerText = document.getElementById('custName').value || 'Customer Name';
+        document.getElementById('docCustPhone').innerText = document.getElementById('custPhone').value || '-';
+        document.getElementById('docCustEmail').innerText = document.getElementById('custEmail').value || '-';
+        document.getElementById('docCustAddress').innerText = document.getElementById('custAddress').value || '-';
+        
+        // Set Header sys size
+        document.getElementById('docSysSize').innerText = data.sysType;
+
+        // Build Table
+        let tableHTML = `
+            <tr>
+                <td><strong>Solar PV Modules</strong><br><span style="font-size:0.8rem;color:#64748b">${data.panelType}</span></td>
+                <td class="col-qty">${data.numPanels}</td>
+                <td class="col-price">${formatINR(data.panelUnitPrice)}</td>
+                <td class="col-total">${formatINR(data.panelTotal)}</td>
+            </tr>
+            <tr>
+                <td><strong>Inverter Unit</strong><br><span style="font-size:0.8rem;color:#64748b">${data.inverterType}</span></td>
+                <td class="col-qty">1</td>
+                <td class="col-price">${formatINR(data.inverterTotal)}</td>
+                <td class="col-total">${formatINR(data.inverterTotal)}</td>
+            </tr>
+        `;
+        
+        if (data.batteryType !== 'No Battery') {
+            tableHTML += `
+                <tr>
+                    <td><strong>Energy Storage</strong><br><span style="font-size:0.8rem;color:#64748b">${data.batteryType}</span></td>
+                    <td class="col-qty">1</td>
+                    <td class="col-price">${formatINR(data.batteryTotal)}</td>
+                    <td class="col-total">${formatINR(data.batteryTotal)}</td>
+                </tr>
+            `;
+        }
+        
+        tableHTML += `
+            <tr>
+                <td><strong>Balance of System & Installation</strong><br><span style="font-size:0.8rem;color:#64748b">Mounting structure, AC/DC DBs, Cables, Earthing</span></td>
+                <td class="col-qty">1</td>
+                <td class="col-price">${formatINR(data.installTotal)}</td>
+                <td class="col-total">${formatINR(data.installTotal)}</td>
+            </tr>
+        `;
+        
+        document.getElementById('docTableBody').innerHTML = tableHTML;
+        
+        // Set Totals
+        document.getElementById('docSubtotal').innerText = formatINR(data.subtotal);
+        document.getElementById('docGst').innerText = formatINR(data.gst);
+        document.getElementById('docSubsidy').innerText = formatINR(data.subsidy);
+        document.getElementById('docTotal').innerText = formatINR(data.totalAmount);
+        
+        // Show Modal
+        document.getElementById('quoteModal').classList.add('active');
+        document.body.style.overflow = 'hidden'; // prevent bg scroll
+    }
+
+    function closeQuote() {
+        document.getElementById('quoteModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Set current year
+    document.getElementById('currentYear').innerText = new Date().getFullYear();
+
+    // Init first calculation on load
+    window.onload = () => {
+        calculateQuote();
+    };
+
+    // Close modal on click outside
+    document.getElementById('quoteModal').addEventListener('click', function(e) {
+        if (e.target === this) closeQuote();
+    });
+
+    // PDF Download using jsPDF
+    function downloadPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF('p', 'mm', 'a4');
+        const w = doc.internal.pageSize.getWidth();
+        const data = calculateQuote(true);
+        const custName = document.getElementById('custName').value || 'Customer';
+        const custPhone = document.getElementById('custPhone').value || '-';
+        const custEmail = document.getElementById('custEmail').value || '-';
+        const custAddress = document.getElementById('custAddress').value || '-';
+        const today = new Date();
+        const dateStr = today.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+        const refNum = 'DEMO-' + Math.floor(1000 + Math.random() * 9000);
+        let y = 15;
+
+        // Header bar
+        doc.setFillColor(99, 102, 241);
+        doc.rect(0, 0, w, 38, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(22);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Demo Solar Company', 15, 18);
+        doc.setFontSize(9);
+        doc.setFont('helvetica', 'normal');
+        doc.text('123 Clean Energy Park, Green City | contact@demosolar.com', 15, 26);
+        doc.setFontSize(14);
+        doc.setFont('helvetica', 'bold');
+        doc.text('QUOTATION', w - 15, 15, { align: 'right' });
+        doc.setFontSize(9);
+        doc.setFont('helvetica', 'normal');
+        doc.text('Ref: ' + refNum, w - 15, 22, { align: 'right' });
+        doc.text('Date: ' + dateStr, w - 15, 28, { align: 'right' });
+        y = 50;
+
+        // Customer box
+        doc.setDrawColor(230, 230, 235);
+        doc.setFillColor(248, 248, 246);
+        doc.roundedRect(15, y, w - 30, 30, 3, 3, 'FD');
+        doc.setTextColor(30, 30, 50);
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Prepared For:', 20, y + 8);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(11);
+        doc.text(custName, 20, y + 16);
+        doc.setFontSize(9);
+        doc.text(custAddress, 20, y + 23);
+        doc.text('Phone: ' + custPhone + '   |   Email: ' + custEmail, w - 20, y + 16, { align: 'right' });
+        y += 40;
+
+        // System info
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(99, 102, 241);
+        doc.text(data.sysType + ' Grid-Tied Solar System', 15, y);
+        y += 10;
+
+        // Table header
+        doc.setFillColor(99, 102, 241);
+        doc.rect(15, y, w - 30, 9, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(9);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Description', 20, y + 6);
+        doc.text('Qty', 115, y + 6, { align: 'center' });
+        doc.text('Unit Price', 145, y + 6, { align: 'right' });
+        doc.text('Total', w - 20, y + 6, { align: 'right' });
+        y += 12;
+
+        // Table rows
+        doc.setTextColor(30, 30, 50);
+        const rows = [
+            ['Solar PV Modules (' + data.panelType + ')', data.numPanels, formatINR(data.panelUnitPrice), formatINR(data.panelTotal)],
+            ['Inverter Unit (' + data.inverterType + ')', 1, formatINR(data.inverterTotal), formatINR(data.inverterTotal)],
+        ];
+        if (data.batteryType !== 'No Battery') {
+            rows.push(['Energy Storage (' + data.batteryType + ')', 1, formatINR(data.batteryTotal), formatINR(data.batteryTotal)]);
+        }
+        rows.push(['Installation & Balance of System', 1, formatINR(data.installTotal), formatINR(data.installTotal)]);
+
+        rows.forEach((row, i) => {
+            if (i % 2 === 0) {
+                doc.setFillColor(248, 248, 250);
+                doc.rect(15, y - 4, w - 30, 10, 'F');
+            }
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(9);
+            doc.text(row[0], 20, y + 2);
+            doc.text(String(row[1]), 115, y + 2, { align: 'center' });
+            doc.text(row[2], 145, y + 2, { align: 'right' });
+            doc.setFont('helvetica', 'bold');
+            doc.text(row[3], w - 20, y + 2, { align: 'right' });
+            y += 10;
+        });
+
+        y += 5;
+        doc.setDrawColor(230, 230, 235);
+        doc.line(100, y, w - 15, y);
+        y += 8;
+
+        // Totals
+        const totals = [
+            ['Subtotal', formatINR(data.subtotal)],
+            ['GST (18%)', formatINR(data.gst)],
+            ['Government Subsidy', formatINR(data.subsidy)],
+        ];
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        totals.forEach(t => {
+            doc.setTextColor(100, 100, 130);
+            doc.text(t[0], 120, y);
+            doc.setTextColor(30, 30, 50);
+            doc.text(t[1], w - 20, y, { align: 'right' });
+            y += 7;
+        });
+
+        y += 2;
+        doc.setFillColor(99, 102, 241);
+        doc.roundedRect(100, y - 5, w - 115, 14, 2, 2, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'bold');
+        doc.text('TOTAL: ' + formatINR(data.totalAmount), w - 20, y + 5, { align: 'right' });
+        y += 22;
+
+        // Terms
+        doc.setTextColor(30, 30, 50);
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Terms & Conditions', 15, y);
+        y += 7;
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8);
+        doc.setTextColor(100, 100, 130);
+        const terms = [
+            '1. Prices inclusive of standard installation within city limits.',
+            '2. Payment: 50% advance, 40% on delivery, 10% on commissioning.',
+            '3. Warranty: 25 years on panels, 10 years on inverter.',
+            '4. Subsidy processing depends on government portal approvals.',
+        ];
+        terms.forEach(t => { doc.text(t, 15, y); y += 5; });
+
+        y += 8;
+        doc.setTextColor(160, 160, 180);
+        doc.setFontSize(7);
+        doc.text('* This is a sample quotation generated by John Linnu Kalavala\'s demo system *', w / 2, y, { align: 'center' });
+
+        // Footer bar
+        doc.setFillColor(248, 248, 246);
+        doc.rect(0, 280, w, 17, 'F');
+        doc.setTextColor(100, 100, 130);
+        doc.setFontSize(7);
+        doc.text('Generated by John Linnu Kalavala | Portfolio Demo System | johnlinnu@gmail.com', w / 2, 288, { align: 'center' });
+
+        doc.save('Sample_Quotation_' + refNum + '.pdf');
+    }
+</script>
+</body>
+</html>

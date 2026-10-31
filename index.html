@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Linnu Kalavala — Web Systems & Application Developer</title>
+    <meta name="description" content="John Linnu Kalavala — Engineering student at JNTU K Kakinada, building custom web applications, music slot booking systems, conference ticketing platforms, and automated business quotation generators.">
+    <meta name="author" content="John Linnu Kalavala">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ═══ NAVIGATION ═══ -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">
+                <div class="nav-logo-dot"></div>
+                <span>John Linnu</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#services" class="nav-link">What I Do</a>
+                <a href="#clients" class="nav-link">Clients</a>
+                <a href="#macbook-showcase" class="nav-link">3D Showcase</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#demo-video" class="nav-link">Demo Video</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <a href="assets/resume.pdf" class="nav-resume-btn" target="_blank" download="John_Linnu_Kalavala_Resume.pdf">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Resume
+            </a>
+            <a href="#contact" class="nav-cta">Let's Talk</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay">
+        <div class="mobile-overlay-content">
+            <a href="#about" class="mobile-link">About</a>
+            <a href="#services" class="mobile-link">What I Do</a>
+            <a href="#clients" class="mobile-link">Clients</a>
+            <a href="#macbook-showcase" class="mobile-link">3D Showcase</a>
+            <a href="#projects" class="mobile-link">Projects</a>
+            <a href="#demo-video" class="mobile-link">Demo Video</a>
+            <a href="#contact" class="mobile-link">Contact</a>
+            <a href="assets/resume.pdf" class="mobile-link" target="_blank" download="John_Linnu_Kalavala_Resume.pdf" style="color: var(--accent-primary); font-weight: 700;">📄 Download Resume (PDF)</a>
+        </div>
+    </div>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-wrap">
+            <div class="hero-gradient-orb hero-orb-1"></div>
+            <div class="hero-gradient-orb hero-orb-2"></div>
+            <div class="hero-gradient-orb hero-orb-3"></div>
+        </div>
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <div class="hero-badge anim-fade-up" style="--delay:0s">
+                    <span class="hero-badge-dot"></span>
+                    Available for freelance projects
+                </div>
+                <div class="hero-name-wrap anim-fade-up" style="--delay:0.1s">
+                    <h1 class="hero-typing-title" id="heroTypingTitle" aria-label="JOHN LINNU KALAVALA">
+                        <span class="hero-typing-text" id="heroTypingText">JOHN LINNU KALAVALA</span><span class="typing-caret" id="heroTypingCaret">|</span>
+                    </h1>
+                    <div class="hero-name-underline-wrap"><div class="hero-name-underline"></div></div>
+                </div>
+                <p class="hero-tagline anim-fade-up" style="--delay:0.15s">
+                    I build custom <span class="hero-highlight">web applications</span> & automated business systems
+                </p>
+                <p class="hero-subtitle anim-fade-up" style="--delay:0.2s">
+                    <strong>Electrical &amp; Electronics Engineering (EEE)</strong> undergraduate at <strong>JNTU College of Engineering Kakinada (JNTUK)</strong>, building production booking platforms, automated business engines, and high-performance web systems.
+                </p>
+                <div class="hero-actions anim-fade-up" style="--delay:0.3s">
+                    <a href="#macbook-showcase" class="btn btn-primary">
+                        Explore 3D Showcase
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 17 5-5-5-5"/><path d="m13 17 5-5-5-5"/></svg>
+                    </a>
+                    <a href="assets/resume.pdf" class="btn btn-secondary hero-resume-btn" target="_blank" download="John_Linnu_Kalavala_Resume.pdf">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
+                        Download Resume
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                </div>
+                <div class="hero-trust anim-fade-up" style="--delay:0.4s">
+                    <div class="trust-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        6+ Projects Delivered
+                    </div>
+                    <div class="trust-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        JNTUK Kakinada (EEE)
+                    </div>
+                    <div class="trust-item">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        Hardware &amp; Web Systems
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual anim-fade-up" style="--delay:0.2s">
+                <div class="hero-stage-clean" id="heroStageClean">
+                    <!-- Ambient Spatial Halo Glow -->
+                    <div class="hero-spatial-halo"></div>
+
+                    <div class="hero-photo-wrap" id="heroPhotoWrap">
+                        <div class="hero-photo-frame">
+                            <img src="assets/avatar.jpg" alt="John Linnu Kalavala" class="hero-photo">
+                        </div>
+                        <div class="float-card float-card-1">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                            <span>Full-Stack Dev</span>
+                        </div>
+                        <div class="float-card float-card-2">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            <span>Booking &amp; PDF Apps</span>
+                        </div>
+                        <div class="float-card float-card-3">
+                            <div class="float-card-age" id="heroAge">17</div>
+                            <span>Years Old</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <div class="scroll-hint-line"></div>
+            <span>Scroll to explore</span>
+        </div>
+    </section>
+
+    <!-- ═══ ABOUT ═══ -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-label anim-reveal scroll-typing-label" data-type-label="01 // ABOUT JOHN LINNU">About Me</div>
+            <div class="about-layout">
+                <div class="about-main anim-reveal">
+                    <h2 class="section-heading scroll-kinetic-heading">
+                        A <span id="ageInline">17</span>-year-old <em>Electrical &amp; Electronics Engineering</em> student at <em>JNTU K Kakinada</em>
+                        building <em>practical, real-world software.</em>
+                    </h2>
+                    <p class="about-lead">
+                        Hi, I'm John Linnu Kalavala, currently studying <strong>Electrical &amp; Electronics Engineering (EEE)</strong> at <strong>JNTU College of Engineering Kakinada (JNTUK)</strong>, Andhra Pradesh. I fuse fundamental circuit analysis and embedded systems logic with high-performance web engineering, responsive user interfaces, and business workflow automation.
+                    </p>
+                    <p class="about-text">
+                        My portfolio spans commercial systems used daily across Andhra Pradesh — including the <strong>Thomas International Music Academy (TIMA) studio management &amp; slot booking PWA</strong>, <strong>KAPL Enterprises automated quotation engines &amp; 6-document batch legal generators</strong>, <strong>Bharat Pro Lifts engineering matrices</strong>, and <strong>conference digital ticketing platforms</strong>.
+                    </p>
+                    <p class="about-text">
+                        Every system I engineer is built for speed, reliability, and human-centric clarity, with zero unnecessary bloat and immediate business value.
+                    </p>
+                    <div class="about-resume-actions" style="margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+                        <a href="assets/resume.pdf" class="btn btn-primary" target="_blank" download="John_Linnu_Kalavala_Resume.pdf" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            Download Full Resume (A4)
+                        </a>
+                        <a href="resume.html" target="_blank" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px;">
+                            View Web Resume
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="about-stats anim-reveal">
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="6">0</div>
+                        <div class="stat-text">Projects<br>Delivered</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="ageDisplay" data-count="17">0</div>
+                        <div class="stat-text">Years<br>Old</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="5">0</div>
+                        <div class="stat-text">Live Web<br>Systems</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                        </div>
+                        <div class="stat-text">JNTUK Kakinada<br>EEE Department</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── JNTU Kakinada University Campus Showcase ── -->
+            <div class="jntuk-showcase-card anim-reveal">
+                <div class="jntuk-img-wrap">
+                    <img src="assets/jntuk-campus.jpg" alt="Administration Building of Jawaharlal Nehru Technological University Kakinada (JNTUK)" class="jntuk-campus-img" loading="lazy">
+                    <div class="jntuk-img-overlay">
+                        <span class="jntuk-badge">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                            Historic University Campus &bull; Est. 1946
+                        </span>
+                    </div>
+                </div>
+                <div class="jntuk-details">
+                    <div class="jntuk-tag">University Credentials</div>
+                    <h3 class="jntuk-title">JNTU College of Engineering, Kakinada (JNTUK)</h3>
+                    <p class="jntuk-degree">Bachelor of Technology (B.Tech) in Electrical &amp; Electronics Engineering (EEE) &bull; 2024 &ndash; 2028</p>
+                    <p class="jntuk-desc">Currently pursuing Electrical &amp; Electronics Engineering at Jawaharlal Nehru Technological University Kakinada (JNTUK), one of Andhra Pradesh's premier technical institutions. Leveraging core engineering training in electrical circuits, digital systems, and microprocessors alongside commercial web application development.</p>
+                    <div class="jntuk-badges">
+                        <span>Circuit Theory &amp; Networks</span>
+                        <span>Digital Electronics</span>
+                        <span>Microprocessors &amp; Embedded</span>
+                        <span>Data Structures &amp; Algorithms</span>
+                        <span>Database Systems (DBMS)</span>
+                        <span>Web Application Engineering</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ WHAT I DO ═══ -->
+    <section class="section section-alt" id="services">
+        <div class="container">
+            <div class="section-label anim-reveal scroll-typing-label" data-type-label="02 // WHAT I DO &amp; BUILD">What I Do</div>
+            <h2 class="section-heading centered anim-reveal scroll-kinetic-heading">
+                I build intelligent applications &amp;<br><em>automated web systems</em>
+            </h2>
+            <div class="services-grid">
+                <div class="service-card anim-reveal">
+                    <div class="service-icon service-icon-blue">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
+                    </div>
+                    <h3 class="service-title">Quotation Generators</h3>
+                    <p class="service-desc">Custom quotation engines with dynamic pricing, tax calculations, catalog selectors, and instant branded PDF generation.</p>
+                    <div class="service-tags"><span>Auto Pricing</span><span>PDF Export</span><span>GST Ready</span></div>
+                </div>
+                <div class="service-card anim-reveal">
+                    <div class="service-icon service-icon-amber">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><circle cx="12" cy="15" r="2"/></svg>
+                    </div>
+                    <h3 class="service-title">Booking &amp; Ticketing Apps</h3>
+                    <p class="service-desc">Interactive reservation platforms like music slot booking and conference registration with tier pricing &amp; digital QR e-tickets.</p>
+                    <div class="service-tags"><span>Slot Booking</span><span>QR Tickets</span><span>Real-Time</span></div>
+                </div>
+                <div class="service-card anim-reveal">
+                    <div class="service-icon service-icon-violet">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"/><polyline points="14 2 14 8 20 8"/><path d="m3 15 2 2 4-4"/></svg>
+                    </div>
+                    <h3 class="service-title">Document Automation</h3>
+                    <p class="service-desc">Generate batches of official legal agreements, certificates, and reports from a single form entry with DOCX &amp; PDF templates.</p>
+                    <div class="service-tags"><span>DOCX Export</span><span>Batch Process</span><span>Templates</span></div>
+                </div>
+                <div class="service-card anim-reveal">
+                    <div class="service-icon service-icon-emerald">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+                    </div>
+                    <h3 class="service-title">Modern Web Interfaces</h3>
+                    <p class="service-desc">Clean, responsive web interfaces with smooth animations, mobile-first design, and seamless user experiences.</p>
+                    <div class="service-tags"><span>Responsive</span><span>Modern UI</span><span>Animations</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ CLIENTS ═══ -->
+    <section class="section section-alt" id="clients">
+        <div class="container">
+            <div class="section-label centered anim-reveal scroll-typing-label" data-type-label="03 // TRUSTED BY COMPANIES">Trusted By</div>
+            <h2 class="section-heading centered anim-reveal scroll-kinetic-heading">Companies I've <em>worked with</em></h2>
+            <div class="clients-bar anim-reveal">
+                <div class="client-logo-item">
+                    <img src="assets/logo-kapl.jpg" alt="KAPL Enterprises" loading="lazy">
+                </div>
+                <div class="client-logo-item">
+                    <img src="assets/logo-bharat.jpg" alt="Bharat Pro Lifts" loading="lazy">
+                </div>
+                <div class="client-logo-item">
+                    <img src="assets/logo-effisol.png" alt="Effisol Energy Solutions" loading="lazy">
+                </div>
+                <div class="client-logo-item">
+                    <img src="assets/logo-tima.png" alt="Thomas International Music Academy (TIMA)" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ 3D MACBOOK SCROLL-TURN DEVICE SHOWCASE ═══ -->
+    <section class="section macbook-showcase-section" id="macbook-showcase">
+        <div class="container">
+            <div class="section-label centered anim-reveal scroll-typing-label" data-type-label="04 // INTERACTIVE 3D DEVICE SHOWCASE">Device Showcase</div>
+            <h2 class="section-heading centered anim-reveal scroll-kinetic-heading">
+                Turn the hardware.<br><em>Explore every live system.</em>
+            </h2>
+            <p class="section-subtitle centered anim-reveal" style="max-width: 680px; margin: 0 auto 36px;">
+                As you scroll, the MacBook turns towards you in 3D perspective — just like unboxing an Apple MacBook. Select any system tab to inspect the production interface.
+            </p>
+
+            <!-- Project Selector Interactive Tabs -->
+            <div class="macbook-tabs anim-reveal">
+                <button class="macbook-tab active" data-project="tima">
+                    <span class="tab-dot"></span>
+                    <span class="tab-title">TIMA Music Studio PWA</span>
+                </button>
+                <button class="macbook-tab" data-project="kapl-quote">
+                    <span class="tab-dot"></span>
+                    <span class="tab-title">KAPL Solar Quotation</span>
+                </button>
+                <button class="macbook-tab" data-project="kapl-docs">
+                    <span class="tab-dot"></span>
+                    <span class="tab-title">Solar Document Pro (6 DOCX)</span>
+                </button>
+                <button class="macbook-tab" data-project="bharat">
+                    <span class="tab-dot"></span>
+                    <span class="tab-title">Bharat Pro Lifts</span>
+                </button>
+                <button class="macbook-tab" data-project="effisol">
+                    <span class="tab-dot"></span>
+                    <span class="tab-title">Effisol Energy Platform</span>
+                </button>
+                <button class="macbook-tab" data-project="techsummit">
+                    <span class="tab-dot"></span>
+                    <span class="tab-title">TechSummit QR Ticketing</span>
+                </button>
+            </div>
+
+            <!-- 3D Perspective Stage -->
+            <div class="macbook-stage" id="macbookStage">
+                <!-- Ambient Device Halo Glow -->
+                <div class="macbook-ambient-glow"></div>
+
+                <!-- 3D Turning MacBook -->
+                <div class="macbook-device" id="macbookDevice">
+                    <!-- Lid (Display Housing) -->
+                    <div class="macbook-lid">
+                        <div class="macbook-bezel">
+                            <!-- Notch & Camera -->
+                            <div class="macbook-camera">
+                                <span class="camera-lens"></span>
+                                <span class="camera-led"></span>
+                            </div>
+
+                            <!-- macOS Window Chrome & Display -->
+                            <div class="macbook-screen">
+                                <!-- macOS Window Titlebar -->
+                                <div class="macos-titlebar">
+                                    <div class="macos-controls">
+                                        <span class="mac-dot mac-dot-red"></span>
+                                        <span class="mac-dot mac-dot-yellow"></span>
+                                        <span class="mac-dot mac-dot-green"></span>
+                                    </div>
+                                    <div class="macos-url-bar">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                        <span id="macbookUrlText">tima.academy/studio-portal/app</span>
+                                    </div>
+                                    <div class="macos-actions">
+                                        <span class="macos-badge" id="macbookLiveBadge">LIVE PWA</span>
+                                    </div>
+                                </div>
+
+                                <!-- Screen Display Canvas / Images -->
+                                <div class="macbook-display-viewport">
+                                    <div class="macbook-slide active" data-slide="tima">
+                                        <img src="assets/project-music-booking.jpg" alt="TIMA Music Studio PWA" class="macbook-screen-img">
+                                        <div class="screen-hud-overlay">
+                                            <div class="screen-hud-title">Thomas International Music Academy</div>
+                                            <div class="screen-hud-sub">Studio Management &amp; Slot Booking PWA &bull; 18h Daily Operations</div>
+                                        </div>
+                                    </div>
+                                    <div class="macbook-slide" data-slide="kapl-quote">
+                                        <img src="assets/project-kapl-quotation.jpg" alt="KAPL Solar Quotation System" class="macbook-screen-img">
+                                        <div class="screen-hud-overlay">
+                                            <div class="screen-hud-title">KAPL Enterprises</div>
+                                            <div class="screen-hud-sub">Solar Quotation Generator &bull; Dynamic Pricing &amp; GST &bull; A4 PDF</div>
+                                        </div>
+                                    </div>
+                                    <div class="macbook-slide" data-slide="kapl-docs">
+                                        <img src="assets/project-kapl-documents.jpg" alt="Solar Document Generator Pro" class="macbook-screen-img">
+                                        <div class="screen-hud-overlay">
+                                            <div class="screen-hud-title">Solar Document Generator Pro</div>
+                                            <div class="screen-hud-sub">6 Legal Agreements &bull; Batch Combined DOCX &bull; 10+ hrs/wk Saved</div>
+                                        </div>
+                                    </div>
+                                    <div class="macbook-slide" data-slide="bharat">
+                                        <img src="assets/project-bharat-lifts.jpg" alt="Bharat Pro Lifts Quotation System" class="macbook-screen-img">
+                                        <div class="screen-hud-overlay">
+                                            <div class="screen-hud-title">Bharat Pro Lifts</div>
+                                            <div class="screen-hud-sub">Elevator Calculation Matrices &bull; Multi-Floor Load &amp; Shaft Pricing</div>
+                                        </div>
+                                    </div>
+                                    <div class="macbook-slide" data-slide="effisol">
+                                        <img src="assets/project-effisol.jpg" alt="Effisol Energy Solutions" class="macbook-screen-img">
+                                        <div class="screen-hud-overlay">
+                                            <div class="screen-hud-title">Effisol Energy Solutions</div>
+                                            <div class="screen-hud-sub">Tier-1 Module Catalog &bull; Commercial Quotation Proposals &bull; Visakhapatnam</div>
+                                        </div>
+                                    </div>
+                                    <div class="macbook-slide" data-slide="techsummit">
+                                        <img src="assets/project-conference-ticket.jpg" alt="TechSummit Conference Registration" class="macbook-screen-img">
+                                        <div class="screen-hud-overlay">
+                                            <div class="screen-hud-title">TechSummit Event Ticketing</div>
+                                            <div class="screen-hud-sub">Multi-Tier Passes &bull; Scannable QR Verification &bull; Digital Badges</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Base (Keyboard & Trackpad Chassis) -->
+                    <div class="macbook-base">
+                        <div class="macbook-base-top">
+                            <div class="macbook-keyboard-recess">
+                                <div class="macbook-keyboard-grid"></div>
+                            </div>
+                            <div class="macbook-trackpad"></div>
+                        </div>
+                        <div class="macbook-thumb-notch"></div>
+                    </div>
+
+                    <!-- 3D Ground Contact Shadow -->
+                    <div class="macbook-ground-shadow"></div>
+                </div>
+            </div>
+
+            <!-- Live Details Bar Below Device -->
+            <div class="macbook-caption-bar anim-reveal">
+                <div class="macbook-status-pill">
+                    <span class="live-pulse-dot"></span>
+                    <span id="macbookProjectName">Thomas International Music Academy (TIMA)</span>
+                </div>
+                <div class="macbook-hint-text">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    <span>Scroll through section &mdash; 3D laptop turns towards you smoothly</span>
+                </div>
+                <a href="tima-demo.html" id="macbookDemoBtn" class="btn btn-secondary macbook-demo-btn">
+                    Launch Interactive Demo
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ PROJECTS ═══ -->
+    <section class="section" id="projects">
+        <div class="container">
+            <div class="section-label anim-reveal scroll-typing-label" data-type-label="05 // DEPLOYED CLIENT SYSTEMS">My Work</div>
+            <h2 class="section-heading centered anim-reveal scroll-kinetic-heading">
+                What I built for<br><em>each company</em>
+            </h2>
+            <p class="section-subtitle centered anim-reveal">Each project is a fully functional system deployed and used daily by the business.</p>
+
+            <!-- ─── KAPL Enterprises — Quotation System ─── -->
+            <div class="company-project anim-reveal">
+                <div class="company-header">
+                    <div class="company-logo-wrap">
+                        <img src="assets/logo-kapl.jpg" alt="KAPL Enterprises" class="company-logo">
+                    </div>
+                    <div class="company-info">
+                        <h3 class="company-name">KAPL Enterprises</h3>
+                        <p class="company-location">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Kakinada, Andhra Pradesh
+                        </p>
+                        <p class="company-industry">Solar Energy Solutions</p>
+                    </div>
+                </div>
+                <div class="company-projects-list">
+                    <div class="company-project-item">
+                        <div class="company-project-image">
+                            <img src="assets/project-kapl-quotation.jpg" alt="KAPL Quotation System" loading="lazy">
+                            <div class="project-card-overlay">
+                                <a href="demo.html" class="project-demo-btn">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                                    View Demo
+                                </a>
+                            </div>
+                        </div>
+                        <div class="company-project-body">
+                            <div class="project-card-tag">Quotation System</div>
+                            <h4 class="company-project-title">Solar Quotation Generator</h4>
+                            <p class="company-project-desc">Built a complete quotation generation system that handles customer details, solar panel product selection, automatic pricing with GST calculations, government subsidy computation, and generates professionally branded A4 PDF quotations with company letterhead, terms & conditions, and bank details — all from a single elegant interface.</p>
+                            <div class="project-card-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>jsPDF</span><span>html2canvas</span></div>
+                            <a href="demo.html" class="project-card-link">View Demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+                        </div>
+                    </div>
+                    <div class="company-project-item">
+                        <div class="company-project-image">
+                            <img src="assets/project-kapl-documents.jpg" alt="KAPL Document System" loading="lazy">
+                            <div class="project-card-overlay">
+                                <a href="demo.html" class="project-demo-btn">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                                    View Demo
+                                </a>
+                            </div>
+                        </div>
+                        <div class="company-project-body">
+                            <div class="project-card-tag">Document Automation</div>
+                            <h4 class="company-project-title">Solar Document Generator Pro</h4>
+                            <p class="company-project-desc">Built an advanced document automation platform that generates 6 different official DOCX documents — Model Agreements, Project Completion Reports, Net Metering Agreements, Grounding Certificates, Panel Detail Annexures, and Synchronisation Certificates — all from a single form entry. Features sidebar navigation, real-time progress tracking, draft saving, single-document mode, and batch download as a combined DOCX file.</p>
+                            <div class="project-card-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Docxtemplater</span><span>PizZip</span></div>
+                            <a href="demo.html" class="project-card-link">View Demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Bharat Pro Lifts ─── -->
+            <div class="company-project anim-reveal">
+                <div class="company-header">
+                    <div class="company-logo-wrap">
+                        <img src="assets/logo-bharat.jpg" alt="Bharat Pro Lifts" class="company-logo">
+                    </div>
+                    <div class="company-info">
+                        <h3 class="company-name">Bharat Pro Lifts</h3>
+                        <p class="company-location">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Andhra Pradesh, India
+                        </p>
+                        <p class="company-industry">Elevator & Lift Solutions</p>
+                    </div>
+                </div>
+                <div class="company-projects-list">
+                    <div class="company-project-item">
+                        <div class="company-project-image">
+                            <img src="assets/project-bharat-lifts.jpg" alt="Bharat Pro Lifts Quotation System" loading="lazy">
+                            <div class="project-card-overlay">
+                                <a href="demo.html" class="project-demo-btn">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                                    View Demo
+                                </a>
+                            </div>
+                        </div>
+                        <div class="company-project-body">
+                            <div class="project-card-tag">Quotation System</div>
+                            <h4 class="company-project-title">Elevator Quotation Generator</h4>
+                            <p class="company-project-desc">Built a professional quotation generator handling lift type selection (passenger, goods, hospital), shaft & car dimension specifications, door opening configurations, floor count settings, load capacity calculations, automatic cost computation, and generates branded A4 PDF quotations. Features an animated navy-blue interface with step-by-step progress tracking.</p>
+                            <div class="project-card-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>jsPDF</span><span>html2canvas</span></div>
+                            <a href="demo.html" class="project-card-link">View Demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Effisol Energy Solutions ─── -->
+            <div class="company-project anim-reveal">
+                <div class="company-header">
+                    <div class="company-logo-wrap">
+                        <img src="assets/logo-effisol.png" alt="Effisol Energy Solutions" class="company-logo">
+                    </div>
+                    <div class="company-info">
+                        <h3 class="company-name">Effisol Energy Solutions</h3>
+                        <p class="company-location">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Visakhapatnam, Andhra Pradesh
+                        </p>
+                        <p class="company-industry">Solar Energy Solutions</p>
+                    </div>
+                </div>
+                <div class="company-projects-list">
+                    <div class="company-project-item">
+                        <div class="company-project-image">
+                            <img src="assets/project-effisol.jpg" alt="Effisol Quotation System" loading="lazy">
+                            <div class="project-card-overlay">
+                                <a href="demo.html" class="project-demo-btn">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                                    View Demo
+                                </a>
+                            </div>
+                        </div>
+                        <div class="company-project-body">
+                            <div class="project-card-tag">Quotation System</div>
+                            <h4 class="company-project-title">Solar Quotation Management System</h4>
+                            <p class="company-project-desc">Built an end-to-end quotation management system featuring a full product catalog for solar panels and inverters, customer information handling, automatic tax & subsidy calculations, professional company-branded quotation generation, and seamless PDF export. Designed for daily business operations with a clean, modern interface.</p>
+                            <div class="project-card-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>jsPDF</span><span>html2canvas</span></div>
+                            <a href="demo.html" class="project-card-link">View Demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Thomas International Music Academy (TIMA) ─── -->
+            <div class="company-project anim-reveal">
+                <div class="company-header">
+                    <div class="company-logo-wrap">
+                        <img src="assets/logo-tima.png" alt="Thomas International Music Academy (TIMA)" class="company-logo">
+                    </div>
+                    <div class="company-info">
+                        <h3 class="company-name">Thomas International Music Academy (TIMA)</h3>
+                        <p class="company-location">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Live PWA &amp; Production Web System
+                        </p>
+                        <p class="company-industry">Music Academy &amp; Creative Tech / Studio Management PWA</p>
+                    </div>
+                </div>
+                <div class="company-projects-list">
+                    <div class="company-project-item">
+                        <div class="company-project-image">
+                            <img src="assets/project-music-booking.jpg" alt="TIMA Music Studio &amp; Slot Booking PWA" loading="lazy">
+                            <div class="project-card-overlay">
+                                <a href="tima-demo.html" class="project-demo-btn">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                                    View Demo
+                                </a>
+                            </div>
+                        </div>
+                        <div class="company-project-body">
+                            <div class="project-card-tag">Studio Management PWA</div>
+                            <h4 class="company-project-title">TIMA — Music Studio Management &amp; Slot Booking PWA</h4>
+                            <p class="company-project-desc">Engineered an end-to-end Studio Management System &amp; Progressive Web App for Thomas International Music Academy (TIMA). Features master coach class scheduling across 18 daily hours (5:00 AM – 11:00 PM), interactive multi-avatar student cluster visualization with pan &amp; zoom cropping, student &amp; parent self-service portals, automated attendance sound alarms, and live make-up slot booking across 9 musical instruments.</p>
+                            <div class="project-card-tech"><span>Node.js</span><span>SQLite</span><span>PWA</span><span>Web Push</span><span>Slot Engine</span><span>REST API</span></div>
+                            <a href="tima-demo.html" class="project-card-link">View Demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── TechSummit — Conference Registration & Ticket Booking ─── -->
+            <div class="company-project anim-reveal">
+                <div class="company-header">
+                    <div class="company-logo-wrap" style="background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);">
+                        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
+                    </div>
+                    <div class="company-info">
+                        <h3 class="company-name">TechSummit — Conference &amp; Event Ticketing</h3>
+                        <p class="company-location">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Live Web Application
+                        </p>
+                        <p class="company-industry">Event Tech / Conference Registration &amp; E-Ticketing</p>
+                    </div>
+                </div>
+                <div class="company-projects-list">
+                    <div class="company-project-item">
+                        <div class="company-project-image">
+                            <img src="assets/project-conference-ticket.jpg" alt="Conference Registration and Ticket Booking System" loading="lazy">
+                            <div class="project-card-overlay">
+                                <a href="techsummit-demo.html" class="project-demo-btn">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                                    View Demo
+                                </a>
+                            </div>
+                        </div>
+                        <div class="company-project-body">
+                            <div class="project-card-tag">Ticketing System</div>
+                            <h4 class="company-project-title">Conference Registration &amp; E-Ticket Booking System</h4>
+                            <p class="company-project-desc">Designed and built a comprehensive conference attendee registration and digital ticketing platform. Features multi-tier pass selection (Standard, All-Access, VIP Delegate), attendee preferences management, dynamic pricing &amp; schedule overview, and instant generation of digital entry tickets with attendee badges and scannable QR codes.</p>
+                            <div class="project-card-tech"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>QR Badge Gen</span><span>Digital Ticketing</span></div>
+                            <a href="techsummit-demo.html" class="project-card-link">View Demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ VIDEO DEMO ═══ -->
+    <section class="section section-alt" id="demo-video">
+        <div class="container">
+            <div class="section-label centered anim-reveal scroll-typing-label" data-type-label="06 // VIDEO DEMONSTRATION">See It In Action</div>
+            <h2 class="section-heading centered anim-reveal scroll-kinetic-heading">Watch how the <em>quotation system</em> works</h2>
+            <p class="section-subtitle centered anim-reveal" style="margin: 0 auto 40px;">A complete walkthrough of the KAPL Enterprises Solar Quotation Generator — from entering customer details to generating a professional PDF in seconds.</p>
+
+            <div class="video-showcase anim-reveal">
+                <div class="video-glow"></div>
+                <div class="video-wrapper">
+                    <!-- CSS overlay to cover watermark (bottom-right corner) -->
+                    <div class="video-watermark-cover"></div>
+                    <video
+                        id="demoVideo"
+                        class="demo-video"
+                        preload="metadata"
+                        playsinline
+                        controls
+                        poster="">
+                        <source src="https://github.com/kalavalajohnlinnu-ui/portfolio-/releases/download/v1.0/demo-video.mp4" type="video/mp4">
+                        <source src="assets/demo-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="video-caption">
+                    <div class="video-caption-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                    </div>
+                    <span>KAPL Enterprises — Solar Quotation System Demo</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ CTA ═══ -->
+    <section class="cta-section anim-reveal">
+        <div class="container">
+            <div class="cta-card">
+                <div class="cta-content">
+                    <h2 class="cta-title">Need a quotation system<br>for your business?</h2>
+                    <p class="cta-text">I build custom automated systems that save you hours of manual work every day. Let's discuss your project.</p>
+                    <a href="#contact" class="btn btn-white">
+                        Start a Conversation
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </a>
+                </div>
+                <div class="cta-decoration">
+                    <div class="cta-circle cta-circle-1"></div>
+                    <div class="cta-circle cta-circle-2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ CONTACT ═══ -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-label anim-reveal scroll-typing-label" data-type-label="07 // GET IN TOUCH &amp; WORK TOGETHER">Get in Touch</div>
+            <h2 class="section-heading centered anim-reveal scroll-kinetic-heading">Let's work together</h2>
+            <p class="section-subtitle centered anim-reveal">Have a project in mind? I'd love to hear about it.</p>
+            <div class="contact-cards anim-reveal" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); max-width: 980px;">
+                <a href="mailto:johnlinnu@gmail.com" class="contact-card">
+                    <div class="contact-card-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    </div>
+                    <div class="contact-card-label">Email Me</div>
+                    <div class="contact-card-value">johnlinnu@gmail.com</div>
+                    <div class="contact-card-action">
+                        Send Email
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
+                <a href="https://wa.me/916302439991" target="_blank" rel="noopener" class="contact-card">
+                    <div class="contact-card-icon" style="background: rgba(37, 211, 102, 0.08); color: #25d366;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    </div>
+                    <div class="contact-card-label">WhatsApp</div>
+                    <div class="contact-card-value">+91 6302439991</div>
+                    <div class="contact-card-action" style="color: #25d366;">
+                        Chat Now
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
+                <a href="assets/resume.pdf" target="_blank" download="John_Linnu_Kalavala_Resume.pdf" class="contact-card">
+                    <div class="contact-card-icon" style="background: rgba(99, 102, 241, 0.08); color: var(--accent-primary);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg>
+                    </div>
+                    <div class="contact-card-label">Curriculum Vitae</div>
+                    <div class="contact-card-value">Official Resume (PDF)</div>
+                    <div class="contact-card-action">
+                        Download PDF
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </div>
+                </a>
+                <div class="contact-card">
+                    <div class="contact-card-icon contact-card-icon-violet">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <div class="contact-card-label">Location</div>
+                    <div class="contact-card-value">Andhra Pradesh, India</div>
+                    <div class="contact-card-action contact-card-action-muted">Open to remote work</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-logo"><div class="nav-logo-dot"></div><span>John Linnu Kalavala</span></div>
+                <p class="footer-text">
+                    Designed &amp; built with passion &bull; 
+                    <a href="assets/resume.pdf" target="_blank" download="John_Linnu_Kalavala_Resume.pdf" style="color: var(--accent-primary); text-decoration: none; font-weight: 600;">Download Resume (PDF)</a>
+                </p>
+                <p class="footer-copy">&copy; <span id="yearDisplay"></span> John Linnu Kalavala. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="cursorCustom" style="position:fixed;top:0;left:0;width:20px;height:20px;border:2px solid rgba(99,102,241,0.7);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 12px rgba(99,102,241,0.4);transition:width 0.2s,height 0.2s;"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

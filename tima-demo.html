@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIMA Studio Management & Slot Booking PWA | Interactive Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --surface-color: #111827;
+            --surface-card: #1f2937;
+            --surface-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-primary: #8b5cf6;
+            --accent-primary-hover: #7c3aed;
+            --accent-indigo: #6366f1;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-rose: #f43f5e;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+            --shadow-glow: 0 0 25px rgba(139, 92, 246, 0.25);
+            --font-heading: 'Plus Jakarta Sans', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Top Header Navigation ── */
+        .app-header {
+            background: rgba(17, 24, 39, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--surface-border);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            padding: 12px 24px;
+        }
+
+        .header-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand-wrap {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+
+        .brand-logo-badge {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, #8b5cf6 0%, #4338ca 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 16px rgba(139, 92, 246, 0.4);
+            color: #ffffff;
+        }
+
+        .brand-text h1 {
+            font-family: var(--font-heading);
+            font-size: 16px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.2px;
+            line-height: 1.2;
+        }
+
+        .brand-text p {
+            font-size: 11.5px;
+            color: var(--text-secondary);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .portal-mode-toggle {
+            display: flex;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 3px;
+            border-radius: 100px;
+            border: 1px solid var(--surface-border);
+        }
+
+        .mode-btn {
+            padding: 6px 14px;
+            border-radius: 100px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .mode-btn.active {
+            background: var(--accent-primary);
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-back-portfolio {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12.5px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 7px 14px;
+            border-radius: 100px;
+            border: 1px solid var(--surface-border);
+            transition: all 0.2s ease;
+        }
+
+        .btn-back-portfolio:hover {
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* ── Container ── */
+        .main-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 24px 20px 60px;
+            width: 100%;
+            flex: 1;
+        }
+
+        /* ── Operational Status Banner ── */
+        .status-hero {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .status-card {
+            background: var(--surface-card);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--card-accent, var(--accent-primary));
+        }
+
+        .status-icon-wrap {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--card-accent, var(--accent-primary));
+        }
+
+        .status-meta .label {
+            font-size: 11.5px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-meta .value {
+            font-family: var(--font-heading);
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-top: 2px;
+        }
+
+        .alarm-test-btn {
+            background: rgba(244, 63, 94, 0.15);
+            border: 1px solid rgba(244, 63, 94, 0.35);
+            color: #fb7185;
+            padding: 5px 12px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .alarm-test-btn:hover {
+            background: rgba(244, 63, 94, 0.25);
+            border-color: #f43f5e;
+            transform: scale(1.03);
+        }
+
+        /* ── Instrument Studios Filter Bar ── */
+        .instrument-filter-bar {
+            background: var(--surface-card);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 14px 18px;
+            margin-bottom: 24px;
+        }
+
+        .filter-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .filter-heading h3 {
+            font-family: var(--font-heading);
+            font-size: 14px;
+            font-weight: 700;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .instrument-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .instrument-pill {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--surface-border);
+            border-radius: 100px;
+            padding: 7px 16px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .instrument-pill:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .instrument-pill.active {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-indigo) 100%);
+            color: #ffffff;
+            border-color: transparent;
+            box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4);
+        }
+
+        /* ── Timetable Slot Grid ── */
+        .timetable-section {
+            background: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-xl);
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .timetable-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--surface-border);
+        }
+
+        .timetable-title-wrap h2 {
+            font-family: var(--font-heading);
+            font-size: 20px;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .timetable-title-wrap p {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .slot-legend {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legend-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+        }
+
+        .dot-avail { background: var(--accent-emerald); box-shadow: 0 0 6px var(--accent-emerald); }
+        .dot-booked { background: var(--accent-rose); }
+        .dot-makeup { background: var(--accent-amber); box-shadow: 0 0 6px var(--accent-amber); }
+
+        /* Time Blocks Grid */
+        .time-blocks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 14px;
+        }
+
+        .slot-card {
+            background: var(--surface-card);
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            position: relative;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 140px;
+        }
+
+        .slot-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.5);
+        }
+
+        .slot-card.status-booked {
+            opacity: 0.75;
+            background: rgba(31, 41, 55, 0.6);
+        }
+
+        .slot-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .slot-time {
+            font-family: var(--font-heading);
+            font-size: 15px;
+            font-weight: 700;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .slot-tag {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-available {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .tag-booked {
+            background: rgba(244, 63, 94, 0.15);
+            color: #fb7185;
+            border: 1px solid rgba(244, 63, 94, 0.3);
+        }
+
+        .tag-makeup {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .slot-body {
+            margin: 8px 0 12px;
+        }
+
+        .slot-room {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .slot-student {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-top: 2px;
+        }
+
+        .slot-coach {
+            font-size: 11.5px;
+            color: var(--text-muted);
+        }
+
+        .slot-btn {
+            width: 100%;
+            padding: 8px;
+            border-radius: var(--radius-md);
+            font-family: var(--font-heading);
+            font-size: 12px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .btn-reserve {
+            background: var(--accent-primary);
+            color: #ffffff;
+        }
+
+        .btn-reserve:hover {
+            background: var(--accent-primary-hover);
+            box-shadow: 0 0 14px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-view-booked {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+        }
+
+        /* ── Modal Booking Overlay ── */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-card {
+            background: #111827;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: var(--radius-xl);
+            width: 100%;
+            max-width: 520px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), var(--shadow-glow);
+            overflow: hidden;
+            animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.92) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            background: #1f2937;
+            border-bottom: 1px solid var(--surface-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-family: var(--font-heading);
+            font-size: 17px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .modal-close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 20px;
+            transition: color 0.2s;
+        }
+
+        .modal-close-btn:hover {
+            color: #ffffff;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 10px 14px;
+            background: #1f2937;
+            border: 1px solid var(--surface-border);
+            border-radius: var(--radius-md);
+            color: #ffffff;
+            font-family: var(--font-body);
+            font-size: 13.5px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus, .form-select:focus {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+        }
+
+        .modal-footer {
+            padding: 16px 24px;
+            background: #1f2937;
+            border-top: 1px solid var(--surface-border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .btn-cancel {
+            padding: 9px 18px;
+            border-radius: var(--radius-md);
+            background: transparent;
+            border: 1px solid var(--surface-border);
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .btn-confirm {
+            padding: 9px 22px;
+            border-radius: var(--radius-md);
+            background: var(--accent-primary);
+            border: none;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-confirm:hover {
+            background: var(--accent-primary-hover);
+            box-shadow: 0 0 14px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #1f2937;
+            border: 1px solid var(--accent-emerald);
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13.5px;
+            font-weight: 600;
+            z-index: 200;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Demo Hub Switcher Bar */
+        .demo-hub-nav {
+            background: rgba(10, 15, 29, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 8px 16px;
+            font-family: inherit;
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+        }
+        .demo-hub-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .demo-hub-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #e2e8f0;
+            text-decoration: none;
+        }
+        .demo-hub-tag {
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .demo-hub-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .demo-hub-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .demo-hub-link:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .demo-hub-link.active {
+            color: #a78bfa;
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid rgba(139, 92, 246, 0.35);
+            font-weight: 600;
+        }
+        .demo-hub-home-btn {
+            color: #f1f5f9;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .demo-hub-home-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Demo Showcase Switcher Hub -->
+    <nav class="demo-hub-nav">
+        <div class="demo-hub-container">
+            <a href="index.html" class="demo-hub-brand">
+                <span class="demo-hub-tag">Live Showcase</span>
+                <span>John Linnu Kalavala &bull; Project Demos</span>
+            </a>
+            <div class="demo-hub-links">
+                <a href="index.html" class="demo-hub-link demo-hub-home-btn">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+                    Portfolio Main
+                </a>
+                <a href="tima-demo.html" class="demo-hub-link active">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                    TIMA Music Academy
+                </a>
+                <a href="techsummit-demo.html" class="demo-hub-link">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/></svg>
+                    TechSummit &amp; PhonePe
+                </a>
+                <a href="demo.html" class="demo-hub-link">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/></svg>
+                    KAPL Solar Quotation
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Navigation -->
+    <header class="app-header">
+        <div class="header-inner">
+            <a href="index.html" class="brand-wrap">
+                <div class="brand-logo-badge">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                </div>
+                <div class="brand-text">
+                    <h1>TIMA Studio Operations</h1>
+                    <p>Thomas International Music Academy &bull; Slot Booking PWA</p>
+                </div>
+            </a>
+
+            <div class="header-actions">
+                <div class="portal-mode-toggle">
+                    <button class="mode-btn active" id="btnStudentMode">Student / Parent</button>
+                    <button class="mode-btn" id="btnCoachMode">Master Coach Portal</button>
+                </div>
+                <a href="index.html" class="btn-back-portfolio">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg>
+                    Back to Portfolio
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+
+        <!-- Operational Status Banner -->
+        <section class="status-hero">
+            <div class="status-card" style="--card-accent: #8b5cf6;">
+                <div class="status-icon-wrap">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div class="status-meta">
+                    <div class="label">Operating Hours</div>
+                    <div class="value">5:00 AM – 11:00 PM</div>
+                    <div style="font-size: 11px; color: #a78bfa; margin-top: 2px;">18 Continuous Daily Hours</div>
+                </div>
+            </div>
+
+            <div class="status-card" style="--card-accent: #10b981;">
+                <div class="status-icon-wrap">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <div class="status-meta">
+                    <div class="label">Today's Occupancy</div>
+                    <div class="value" id="occupancyText">46 / 54 Slots</div>
+                    <div style="font-size: 11px; color: #34d399; margin-top: 2px;">85% High Utilization</div>
+                </div>
+            </div>
+
+            <div class="status-card" style="--card-accent: #f59e0b;">
+                <div class="status-icon-wrap">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </div>
+                <div class="status-meta">
+                    <div class="label">Make-Up Slots</div>
+                    <div class="value">8 Rooms Open</div>
+                    <div style="font-size: 11px; color: #fbbf24; margin-top: 2px;">Instant Re-Booking Engine</div>
+                </div>
+            </div>
+
+            <div class="status-card" style="--card-accent: #f43f5e;">
+                <div class="status-icon-wrap">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                </div>
+                <div class="status-meta">
+                    <div class="label">Coach Audio Alert</div>
+                    <div class="value">Live Alarm Engine</div>
+                    <button class="alarm-test-btn" id="btnTestAlarm">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/></svg>
+                        Test Synthesizer Audio
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Instrument Studios Filter Bar -->
+        <section class="instrument-filter-bar">
+            <div class="filter-heading">
+                <h3>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                    Filter by Musical Instrument Room (9 Studios)
+                </h3>
+                <span style="font-size: 12px; color: var(--text-muted);">Select instrument to inspect live studio rooms</span>
+            </div>
+            <div class="instrument-pills" id="instrumentPills">
+                <button class="instrument-pill active" data-inst="all">All Instruments</button>
+                <button class="instrument-pill" data-inst="piano">🎹 Piano Studio</button>
+                <button class="instrument-pill" data-inst="guitar">🎸 Acoustic &amp; Electric Guitar</button>
+                <button class="instrument-pill" data-inst="violin">🎻 Violin Room</button>
+                <button class="instrument-pill" data-inst="drums">🥁 Drums &amp; Percussion</button>
+                <button class="instrument-pill" data-inst="vocals">🎙️ Vocals &amp; Choral Studio</button>
+                <button class="instrument-pill" data-inst="keyboard">🎹 Synthesizer Lab</button>
+                <button class="instrument-pill" data-inst="wind">🎷 Saxophone &amp; Flute</button>
+            </div>
+        </section>
+
+        <!-- Timetable Section -->
+        <section class="timetable-section">
+            <div class="timetable-header">
+                <div class="timetable-title-wrap">
+                    <h2>Studio Class Schedule &amp; Reservation Board</h2>
+                    <p>Live session roster across 18 operating hours &bull; Click any available slot to test immediate booking</p>
+                </div>
+                <div class="slot-legend">
+                    <div class="legend-item"><span class="legend-dot dot-avail"></span> Available Slot</div>
+                    <div class="legend-item"><span class="legend-dot dot-booked"></span> Confirmed Class</div>
+                    <div class="legend-item"><span class="legend-dot dot-makeup"></span> Make-Up Class</div>
+                </div>
+            </div>
+
+            <!-- Dynamic Slot Grid -->
+            <div class="time-blocks-grid" id="slotsGrid">
+                <!-- Dynamically generated slots -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Booking Dialog -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="modalSlotTitle">Reserve Studio Slot</h3>
+                <button class="modal-close-btn" id="modalCloseBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Selected Instrument &amp; Room</label>
+                    <input type="text" class="form-input" id="modalInstrument" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Session Time Slot</label>
+                    <input type="text" class="form-input" id="modalTime" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Student Name</label>
+                    <input type="text" class="form-input" id="modalStudentName" placeholder="e.g. Samuel David" value="Samuel David">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Assigned Coach</label>
+                    <select class="form-select" id="modalCoach">
+                        <option value="Master Coach Thomas">Master Coach Thomas (Academy Founder)</option>
+                        <option value="Coach Sarah M.">Coach Sarah M. (Classical Piano & Violin)</option>
+                        <option value="Coach Daniel R.">Coach Daniel R. (Contemporary Guitar & Drums)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Session Type</label>
+                    <select class="form-select" id="modalSessionType">
+                        <option value="Regular Class">Regular Curriculum Class</option>
+                        <option value="Make-Up Slot">Make-Up Rescheduled Session</option>
+                        <option value="Masterclass Exam Prep">Masterclass & Exam Preparation</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" id="modalCancelBtn">Cancel</button>
+                <button class="btn-confirm" id="modalConfirmBtn">Confirm Slot Booking</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toastNotification">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <span id="toastMessage">Slot successfully reserved!</span>
+    </div>
+
+    <script>
+        // Sample Studio Data
+        const initialSlots = [
+            { id: 1, time: "06:00 AM – 07:00 AM", inst: "piano", room: "Grand Piano Studio A", student: "Grace K.", coach: "Master Coach Thomas", type: "booked" },
+            { id: 2, time: "07:15 AM – 08:15 AM", inst: "piano", room: "Upright Piano Studio B", student: "David P.", coach: "Coach Sarah M.", type: "booked" },
+            { id: 3, time: "08:30 AM – 09:30 AM", inst: "guitar", room: "Acoustic Room 1", student: "", coach: "Coach Daniel R.", type: "available" },
+            { id: 4, time: "10:00 AM – 11:00 AM", inst: "violin", room: "Violin Ensemble Studio", student: "Ananya R.", coach: "Coach Sarah M.", type: "makeup" },
+            { id: 5, time: "11:30 AM – 12:30 PM", inst: "drums", room: "Percussion Booth", student: "", coach: "Coach Daniel R.", type: "available" },
+            { id: 6, time: "01:00 PM – 02:00 PM", inst: "vocals", room: "Acoustic Vocal Booth", student: "Joshua L.", coach: "Master Coach Thomas", type: "booked" },
+            { id: 7, time: "02:30 PM – 03:30 PM", inst: "piano", room: "Grand Piano Studio A", student: "", coach: "Coach Sarah M.", type: "available" },
+            { id: 8, time: "04:00 PM – 05:00 PM", inst: "guitar", room: "Electric Studio Lab", student: "Kevin T.", coach: "Coach Daniel R.", type: "booked" },
+            { id: 9, time: "05:30 PM – 06:30 PM", inst: "keyboard", room: "Synthesizer Lab 2", student: "", coach: "Master Coach Thomas", type: "available" },
+            { id: 10, time: "07:00 PM – 08:00 PM", inst: "wind", room: "Saxophone & Wind Studio", student: "Michael V.", coach: "Coach Sarah M.", type: "booked" },
+            { id: 11, time: "08:30 PM – 09:30 PM", inst: "piano", room: "Upright Piano Studio B", student: "", coach: "Coach Daniel R.", type: "available" },
+            { id: 12, time: "09:45 PM – 10:45 PM", inst: "vocals", room: "Vocal Recording Suite", student: "Rachel S.", coach: "Master Coach Thomas", type: "makeup" }
+        ];
+
+        let slots = [...initialSlots];
+        let currentFilter = 'all';
+        let activeSlotId = null;
+
+        // Render Slots
+        const slotsGrid = document.getElementById('slotsGrid');
+        function renderSlots() {
+            slotsGrid.innerHTML = '';
+            const filtered = slots.filter(s => currentFilter === 'all' || s.inst === currentFilter);
+
+            filtered.forEach(slot => {
+                const card = document.createElement('div');
+                card.className = `slot-card status-${slot.type}`;
+
+                const tagClass = slot.type === 'available' ? 'tag-available' : (slot.type === 'makeup' ? 'tag-makeup' : 'tag-booked');
+                const tagLabel = slot.type === 'available' ? 'Available' : (slot.type === 'makeup' ? 'Make-Up' : 'Confirmed');
+
+                card.innerHTML = `
+                    <div>
+                        <div class="slot-header">
+                            <div class="slot-time">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                ${slot.time}
+                            </div>
+                            <span class="slot-tag ${tagClass}">${tagLabel}</span>
+                        </div>
+                        <div class="slot-body">
+                            <div class="slot-room">${slot.room}</div>
+                            <div class="slot-student">${slot.student || 'Open for Booking'}</div>
+                            <div class="slot-coach">${slot.coach}</div>
+                        </div>
+                    </div>
+                    <div>
+                        ${slot.type === 'available' ? 
+                            `<button class="slot-btn btn-reserve" onclick="openBookingModal(${slot.id})">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                Book This Slot
+                            </button>` :
+                            `<button class="slot-btn btn-view-booked" onclick="showBookedAlert('${slot.student}', '${slot.time}', '${slot.coach}')">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                Verified Session
+                            </button>`
+                        }
+                    </div>
+                `;
+                slotsGrid.appendChild(card);
+            });
+        }
+
+        // Filter Pills
+        const filterPills = document.querySelectorAll('.instrument-pill');
+        filterPills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                filterPills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                currentFilter = pill.getAttribute('data-inst');
+                renderSlots();
+            });
+        });
+
+        // Booking Modal Logic
+        const modal = document.getElementById('bookingModal');
+        const modalInstrument = document.getElementById('modalInstrument');
+        const modalTime = document.getElementById('modalTime');
+        const modalStudentName = document.getElementById('modalStudentName');
+        const modalCoach = document.getElementById('modalCoach');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        const modalCancelBtn = document.getElementById('modalCancelBtn');
+        const modalConfirmBtn = document.getElementById('modalConfirmBtn');
+
+        window.openBookingModal = function(id) {
+            const slot = slots.find(s => s.id === id);
+            if (!slot) return;
+            activeSlotId = id;
+            modalInstrument.value = slot.room;
+            modalTime.value = slot.time;
+            modal.classList.add('active');
+        };
+
+        const closeModal = () => modal.classList.remove('active');
+        modalCloseBtn.addEventListener('click', closeModal);
+        modalCancelBtn.addEventListener('click', closeModal);
+
+        modalConfirmBtn.addEventListener('click', () => {
+            const student = modalStudentName.value.trim() || 'Samuel David';
+            const coach = modalCoach.value;
+            const slot = slots.find(s => s.id === activeSlotId);
+            if (slot) {
+                slot.type = 'booked';
+                slot.student = student;
+                slot.coach = coach;
+                renderSlots();
+                closeModal();
+                showToast(`Slot reserved for ${student} with ${coach}!`);
+            }
+        });
+
+        // Booked Alert
+        window.showBookedAlert = function(name, time, coach) {
+            showToast(`Active class: ${name} (${time}) with ${coach}`);
+        };
+
+        // Toast Helper
+        const toast = document.getElementById('toastNotification');
+        const toastMsg = document.getElementById('toastMessage');
+        function showToast(msg) {
+            toastMsg.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3500);
+        }
+
+        // Web Audio Synthesizer Alarm Test
+        document.getElementById('btnTestAlarm').addEventListener('click', () => {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const now = audioCtx.currentTime;
+                
+                // Play 3 pleasant ascending studio chimes (A4, C#5, E5)
+                const freqs = [440, 554.37, 659.25, 880];
+                freqs.forEach((f, idx) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(f, now + idx * 0.12);
+                    
+                    gain.gain.setValueAtTime(0, now + idx * 0.12);
+                    gain.gain.linearRampToValueAtTime(0.25, now + idx * 0.12 + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.12 + 0.45);
+                    
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    
+                    osc.start(now + idx * 0.12);
+                    osc.stop(now + idx * 0.12 + 0.5);
+                });
+                showToast("Studio Audio Alarm Chime triggered successfully!");
+            } catch (e) {
+                showToast("Audio alert played (synthesizer simulated)");
+            }
+        });
+
+        // Mode Toggles
+        document.getElementById('btnCoachMode').addEventListener('click', function() {
+            document.getElementById('btnStudentMode').classList.remove('active');
+            this.classList.add('active');
+            showToast("Switched to Master Coach Portal: Attendance & Database snapshots active");
+        });
+
+        document.getElementById('btnStudentMode').addEventListener('click', function() {
+            document.getElementById('btnCoachMode').classList.remove('active');
+            this.classList.add('active');
+            showToast("Switched to Student & Parent Self-Service Booking Mode");
+        });
+
+        // Initial Render
+        renderSlots();
+    </script>
+</body>
+</html>
